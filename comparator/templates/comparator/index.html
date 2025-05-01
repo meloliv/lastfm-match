@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Comparador de Artistas - Last.fm</title>
+</head>
+<body>
+    <h1>🎵 Comparador de Artistas do Last.fm</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <label for="user1">Usuário 1:</label>
+        <input type="text" name="user1" id="user1" required><br><br>
+
+        <label for="user2">Usuário 2:</label>
+        <input type="text" name="user2" id="user2" required><br><br>
+
+        <button type="submit">Comparar</button>
+    </form>
+
+    <hr>
+
+    {% if common_artists is not None %}
+        <h2>🎧 Artistas em comum entre {{ user1 }} e {{ user2 }}:</h2>
+
+        {% if common_artists %}
+            <ul>
+                {% for artist in common_artists %}
+                    <li>{{ artist }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>❌ Nenhum artista em comum encontrado.</p>
+        {% endif %}
+    {% endif %}
+</body>
+</html>
